@@ -13,11 +13,70 @@ const GOAL_COL = 3;
 const GOAL_ROW = 9;
 const GOAL_NAME = "Room 46";
 
+function isGoalReachableFrom(startRow, startCol, blockedRooms) {
+    const wrap = (value, max) => {
+        if (value < 1) return max;
+        if (value > max) return 1;
+        return value;
+    };
+    const key = (row, col) => `${row},${col}`;
+    const blockedSet = new Set(blockedRooms.map((room) => key(room.row, room.col)));
+
+    const startKey = key(startRow, startCol);
+    const goalKey = key(GOAL_ROW, GOAL_COL);
+    if (blockedSet.has(startKey) || blockedSet.has(goalKey)) return false;
+
+    const queue = [{ row: startRow, col: startCol }];
+    const visited = new Set([startKey]);
+
+    while (queue.length) {
+        const { row, col } = queue.shift();
+        if (row === GOAL_ROW && col === GOAL_COL) return true;
+
+        const neighbors = [
+            { row: wrap(row + 1, BOARD_HEIGHT), col },
+            { row: wrap(row - 1, BOARD_HEIGHT), col },
+            { row, col: wrap(col + 1, BOARD_WIDTH) },
+            { row, col: wrap(col - 1, BOARD_WIDTH) },
+        ];
+
+        for (const n of neighbors) {
+            const k = key(n.row, n.col);
+            if (blockedSet.has(k) || visited.has(k)) continue;
+            visited.add(k);
+            queue.push(n);
+        }
+    }
+
+    return false;
+}
+
 export default function Game() {
     const [prince, setPrince] = useState({ row: START_ROW, col: START_COL, facing: "NORTH" });
     const [rooms, setRooms] = useState([]);
     const [report, setReport] = useState("");
     const [hasReachedGoal, setHasReachedGoal] = useState(false);
+    const [stepsSinceLastRoom, setStepsSinceLastRoom] = useState(0);
+    const [nextRoomInSteps, setNextRoomInSteps] = useState(() => 3 + Math.floor(Math.random() * 3));
+
+    const maybeDropBlockingRoomOnNextStep = (nextRow, nextCol, currentRooms, upcomingStepsSinceLastRoom, currentPrince) => {
+        if (upcomingStepsSinceLastRoom < nextRoomInSteps) return null;
+
+        const isGoal = nextRow === GOAL_ROW && nextCol === GOAL_COL;
+        const isSpawn = nextRow === START_ROW && nextCol === START_COL;
+        const alreadyRoom = currentRooms.some((room) => room.row === nextRow && room.col === nextCol);
+        if (isGoal || isSpawn || alreadyRoom) return null;
+
+        const candidate = { row: nextRow, col: nextCol, color: ROOM_COLORS[Math.floor(Math.random() * ROOM_COLORS.length)] };
+        const candidateRooms = [...currentRooms, candidate];
+
+        const reachable = isGoalReachableFrom(currentPrince.row, currentPrince.col, candidateRooms);
+        if (!reachable) return null;
+
+        setStepsSinceLastRoom(0);
+        setNextRoomInSteps(3 + Math.floor(Math.random() * 3));
+        return candidate;
+    };
 
     const handleCommand = (command) => {
         const trimmed = command.trim();
@@ -63,12 +122,28 @@ export default function Game() {
                         break;
                 }
 
+                const upcomingStepsSinceLastRoom = stepsSinceLastRoom + 1;
+                const spawnedRoom = maybeDropBlockingRoomOnNextStep(
+                    newRow,
+                    newCol,
+                    rooms,
+                    upcomingStepsSinceLastRoom,
+                    prince
+                );
+                if (spawnedRoom) {
+                    setRooms([...rooms, spawnedRoom]);
+                    setReport(`A ${spawnedRoom.color.toLowerCase()} room surfaces ahead, as if Mt. Holly changed its mind.`);
+                    return;
+                }
+
                 const blocked = rooms.some((room) => room.row === newRow && room.col === newCol);
                 if (!blocked) {
-                    setPrince({ row: newRow, col: newCol, facing: mf });
+                    const updatedPrince = { row: newRow, col: newCol, facing: mf };
+                    setPrince(updatedPrince);
+                    setStepsSinceLastRoom(upcomingStepsSinceLastRoom);
                     if (newRow === GOAL_ROW && newCol === GOAL_COL) {
                         setHasReachedGoal(true);
-                        setReport(`The crown has reached ${GOAL_NAME}.`);
+                        setReport(`You stand before ${GOAL_NAME}. For a moment, the blueprint feels still.`);
                     }
                 } 
                 break;
@@ -86,10 +161,10 @@ export default function Game() {
 
             case "REPORT":
                 if (prince) {
-                    const objective = `Objective: reach ${GOAL_NAME} at ${GOAL_ROW}, ${GOAL_COL}.`;
+                    const objective = `Objective: reach ${GOAL_NAME} at ${GOAL_ROW}, ${GOAL_COL}, before the house drafts you in.`;
                     const status = prince.row === GOAL_ROW && prince.col === GOAL_COL
-                        ? `Status: objective complete.`
-                        : `Status: en route.`;
+                        ? `Status: Room 46 found.`
+                        : `Status: still roaming the halls.`;
                     setReport(`Prince at ${prince.row}, ${prince.col}, facing ${prince.facing}. ${objective} ${status}`);
                 }
                 break;
@@ -101,10 +176,10 @@ export default function Game() {
 
     return (
         <div style ={{ textAlign: "center", padding: "20px"}}>
-            <h1>Blue Prince Blueprint</h1>
-            <p>Use PLACE_ROOM, MOVE, LEFT, RIGHT, REPORT. Rooms (red, green, purple) block movement like walls. Blueprint size: 5 wide x 9 tall.</p>
-            <p>Spawn: {START_ROW}, {START_COL}. Objective: reach {GOAL_NAME} at {GOAL_ROW}, {GOAL_COL}.</p>
-            {hasReachedGoal && <p style={{ fontWeight: "bold" }}>Objective complete: {GOAL_NAME} reached.</p>}
+            <h1>Mt. Holly: Drafts of the Blue Prince</h1>
+            <p>mt-holly-terminal online. Commands accepted: PLACE_ROOM, MOVE, LEFT, RIGHT, REPORT. Rooms (red, green, purple) block passage. Grid: 5 wide x 9 tall.</p>
+            <p>Source: Entrance Hall {START_ROW},{START_COL}. Target: {GOAL_NAME} at {GOAL_ROW},{GOAL_COL}. Drafts may insert rooms ahead; reroute on the fly.</p>
+            {hasReachedGoal && <p style={{ fontWeight: "bold" }}>mt-holly-terminal&gt; Objective complete. The crown occupies Room 46.</p>}
             <Board prince={prince} rooms={rooms} goal={{ row: GOAL_ROW, col: GOAL_COL, name: GOAL_NAME }} />
             <CommandInput onCommand={handleCommand} />
             <RobotReport report={report}/>
