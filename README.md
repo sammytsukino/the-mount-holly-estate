@@ -11,11 +11,11 @@ Your goal: Navigate from the entrance hall at position (1,3) to Room 46 at posit
 ## Screenshots
 
 ### Home Screen - Blueprint Briefing
-![Home Screen](./screenshots/home-screen.png)
+![Home Screen](https://res.cloudinary.com/dsy30p7gf/image/upload/v1769519799/intro_e7grp6.png)
 *The landing page displays mission briefing, available commands, and game mechanics*
 
 ### Game Interface - Estate Map & Terminal
-![Game Interface](./screenshots/game-interface.png)
+![Game Interface](https://res.cloudinary.com/dsy30p7gf/image/upload/v1769519799/board_hdnpgr.png)
 *Active gameplay showing the 5x9 estate map, crown position, red blocking rooms, and terminal interface*
 
 ## Game Mechanics
@@ -171,7 +171,7 @@ Terminal section uses classic green-on-black terminal styling to contrast with t
 1. **Plan Ahead**: Study the board before making moves
 2. **Use PLACE_ROOM**: Pre-emptively block paths you know will spawn red rooms
 3. **Watch the Pattern**: Red rooms spawn randomly but at regular intervals
-4. **Keep Moving**: The mansion changes its mind—don't hesitate
+4. **Keep Moving**: The mansion changes its mind: don't hesitate
 5. **Learn from Failure**: Use RESET to try new approaches with different strategies
 
 ## Inspiration
@@ -180,10 +180,12 @@ This game is inspired by "Blue Prince" by Dogubomb, a puzzle game about navigati
 
 ## License
 
-This project is a educational implementation created as a university assignment.
+This project is a educational implementation created as an school assignment.
 
 ## Credits
 
 - Game concept inspired by "Blue Prince"
 - Built with React and Tailwind CSS
 - Blueprint aesthetic and narrative by project team
+
+Made with lots of love by SAMMYTSUKINO ~
