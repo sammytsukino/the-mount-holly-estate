@@ -2,13 +2,78 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
     return (
-        <div style={{ textAlign: "center", marginTop: "50px" }}>
-            <h1>Mt. Holly Terminal</h1>
-            <p>The mansion redraws itself as you type. You are the crown-bearer tracing a live blueprint where rooms surface mid-route.</p>
-            <p>Spawn: 1,3. Target: Room 46 at 9,3. Commands: PLACE_ROOM, MOVE, LEFT, RIGHT, REPORT.</p>
-            <Link to="/game">
-                <button style={{ padding: "10px 20px", marginTop: "20px"}}>Open terminal</button>
-            </Link>
+        <div className="min-h-screen blueprint-bg flex items-center justify-center p-8">
+            <div className="blueprint-border bg-blueprint-dark/30 backdrop-blur-sm p-12 max-w-4xl">
+                <div className="flex justify-between mb-4 text-white/50 text-sm font-mono">
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                </div>
+
+                <div className="text-center mb-8">
+                    <h1 className="blueprint-outline-text text-6xl mb-2 tracking-wider">
+                        MOUNT HOLLY ESTATE
+                    </h1>
+                    <h2 className="blueprint-text text-4xl mb-6">
+                        BLUEPRINT
+                    </h2>
+                </div>
+
+                <div className="blueprint-border bg-blueprint-dark/20 p-8 mb-6">
+                    <p className="blueprint-text text-lg mb-6 leading-relaxed">
+                        Mt. Holly Estate is no ordinary mansion: it shifts with every command you type. 
+                        As Crown-Bearer, you trace a living blueprint through its ever-changing halls, 
+                        seeking Room 46: the Antechamber where rightful heirs claim their inheritance.
+                    </p>
+                    
+                    <p className="blueprint-text text-base mb-6 leading-relaxed text-white/90">
+                        But the mansion tests you. Red rooms materialize randomly as you navigate, 
+                        blocking entire corridors. These obstacles force you to recalculate your route 
+                        or use PLACE_ROOM to pre-emptively mark danger zones. The blueprint updates 
+                        in real-time, showing your path, blocked rooms, and the glowing target.
+                    </p>
+
+                    <div className="blueprint-border bg-blueprint-dark/30 p-4 mb-6">
+                        <p className="blueprint-text text-sm mb-3">
+                            <span className="text-white/70">SPAWN:</span> 1,3 
+                            <span className="mx-4">|</span>
+                            <span className="text-white/70">TARGET:</span> Room 46 at 9,3
+                        </p>
+                        <p className="blueprint-text text-sm mb-3">
+                            <span className="text-amber-400/90">OBJECTIVE:</span> Navigate from spawn to Room 46 without hitting blocked rooms
+                        </p>
+                        <p className="blueprint-text text-sm">
+                            <span className="text-red-400/90">WARNING:</span> Red rooms completely block passage—plan ahead or reset
+                        </p>
+                    </div>
+
+                    <div className="blueprint-text text-sm">
+                        <div className="text-white/70 mb-2 font-bold">AVAILABLE COMMANDS:</div>
+                        <div className="grid grid-cols-2 gap-2 text-white/80">
+                            <div>• <span className="text-white">PLACE_ROOM X,Y,RED</span> - Mark a red blocking room</div>
+                            <div>• <span className="text-white">MOVE</span> - Advance one space forward</div>
+                            <div>• <span className="text-white">LEFT</span> - Rotate 90° counterclockwise</div>
+                            <div>• <span className="text-white">RIGHT</span> - Rotate 90° clockwise</div>
+                            <div>• <span className="text-white">REPORT</span> - Show current position & facing</div>
+                            <div>• <span className="text-white">RESET</span> - Clear the board, start fresh</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="text-center">
+                    <Link to="/game">
+                        <button className="blueprint-border bg-blueprint-light/20 hover:bg-blueprint-light/40 blueprint-text px-12 py-4 text-xl font-bold tracking-wider transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]">
+                            OPEN TERMINAL
+                        </button>
+                    </Link>
+                </div>
+
+                <div className="flex justify-between items-center mt-8 text-white/50 text-sm font-mono">
+                    <span>LEVEL 01</span>
+                    <span className="text-2xl italic" style={{ fontFamily: 'cursive' }}>Day One</span>
+                </div>
+            </div>
         </div>
-    )
+    );
 }
