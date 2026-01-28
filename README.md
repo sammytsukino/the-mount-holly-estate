@@ -1,4 +1,4 @@
-# Mount Holly Estate
+# The Mount Holly Estate - A Blueprint Adventure
 
 A command-line puzzle game where you navigate the ever-shifting halls of Mt. Holly Estate as the Crown-Bearer, seeking Room 46—the Antechamber where rightful heirs claim their inheritance.
 
@@ -287,7 +287,7 @@ This game is inspired by "Blue Prince" by Dogubomb, a puzzle game about navigati
 
 ## License
 
-This project is a educational implementation created as an school assignment.
+This project is a educational implementation created as a school assignment.
 
 ## Credits
 
