@@ -14,13 +14,15 @@ export default function Board({ prince, rooms, goal, visitedCells = [] }) {
         RED: "rgba(220, 38, 38, 0.6)",
     };
     
-    const CrownIcon = ({ rotation }) => (
+    const CrownIcon = ({ rotation, facing }) => (
         <svg 
             width="40" 
             height="40" 
             viewBox="0 0 24 24" 
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"
+            aria-label={`Crown-Bearer facing ${facing}`}
+            role="img"
             style={{
                 transform: `rotate(${rotation}deg)`,
                 transition: 'transform 0.3s ease',
@@ -55,7 +57,7 @@ export default function Board({ prince, rooms, goal, visitedCells = [] }) {
             }
 
             if (isPrince) {
-                cellContent = <CrownIcon rotation={crownRotations[prince.facing]} />;
+                cellContent = <CrownIcon rotation={crownRotations[prince.facing]} facing={prince.facing} />;
                 bgColor = "rgba(74, 123, 183, 0.5)";
                 textColor = "white";
                 borderStyle = "2px solid rgba(255, 255, 255, 0.8)";
@@ -71,10 +73,20 @@ export default function Board({ prince, rooms, goal, visitedCells = [] }) {
                 borderStyle = "2px solid rgba(251, 191, 36, 0.8)";
             }
 
+            const getCellLabel = () => {
+                if (isPrince) return `Crown-Bearer at position ${r},${c} facing ${prince.facing}`;
+                if (room) return `Red blocking room at position ${r},${c}`;
+                if (isGoal) return `Goal Room 46 at position ${r},${c}`;
+                if (isVisited) return `Visited cell at position ${r},${c}`;
+                return `Empty cell at position ${r},${c}`;
+            };
+
             cols.push(
                 <td 
                     key={`${r}-${c}`}
                     className="relative"
+                    role="gridcell"
+                    aria-label={getCellLabel()}
                     style={{
                         width: "85px",
                         height: "85px",
@@ -92,7 +104,7 @@ export default function Board({ prince, rooms, goal, visitedCells = [] }) {
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                         {cellContent}
                     </div>
-                    <span className="absolute top-0 left-1 text-[9px] text-white/20 font-mono">
+                    <span className="absolute top-0 left-1 text-[9px] text-white/20 font-mono" aria-hidden="true">
                         {r},{c}
                     </span>
                 </td>       
@@ -105,12 +117,12 @@ export default function Board({ prince, rooms, goal, visitedCells = [] }) {
         <div className="flex justify-center items-center h-full">
             <div className="blueprint-border p-5 bg-blueprint-dark/20">
                 <div className="text-center mb-4">
-                    <h3 className="blueprint-text text-2xl font-bold tracking-wider">
+                    <h3 id="estate-map-title" className="blueprint-text text-2xl font-bold tracking-wider">
                         ESTATE MAP
                     </h3>
                 </div>
                 
-                <div className="flex justify-center mb-2">
+                <div className="flex justify-center mb-2" aria-hidden="true">
                     {[1, 2, 3, 4, 5].map(n => (
                         <div key={n} className="w-[85px] text-center text-white/50 text-sm font-mono">
                             {n}
@@ -119,7 +131,7 @@ export default function Board({ prince, rooms, goal, visitedCells = [] }) {
                 </div>
 
                 <div className="flex">
-                    <div className="flex flex-col-reverse justify-center mr-2">
+                    <div className="flex flex-col-reverse justify-center mr-2" aria-hidden="true">
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => (
                             <div key={n} className="h-[85px] flex items-center text-white/50 text-sm font-mono">
                                 {n}
@@ -127,11 +139,16 @@ export default function Board({ prince, rooms, goal, visitedCells = [] }) {
                         ))}
                     </div>
 
-                    <table style={{ borderCollapse: "collapse" }}>
+                    <table 
+                        style={{ borderCollapse: "collapse" }}
+                        role="grid"
+                        aria-labelledby="estate-map-title"
+                        aria-describedby="map-legend"
+                    >
                         <tbody>{rows}</tbody>
                     </table>
 
-                    <div className="flex flex-col-reverse justify-center ml-2">
+                    <div className="flex flex-col-reverse justify-center ml-2" aria-hidden="true">
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => (
                             <div key={n} className="h-[85px] flex items-center text-white/50 text-sm font-mono">
                                 {n}
@@ -140,7 +157,7 @@ export default function Board({ prince, rooms, goal, visitedCells = [] }) {
                     </div>
                 </div>
 
-                <div className="flex justify-center mt-2">
+                <div className="flex justify-center mt-2" aria-hidden="true">
                     {[1, 2, 3, 4, 5].map(n => (
                         <div key={n} className="w-[85px] text-center text-white/50 text-sm font-mono">
                             {n}
@@ -148,16 +165,16 @@ export default function Board({ prince, rooms, goal, visitedCells = [] }) {
                     ))}
                 </div>
 
-                <div className="mt-5 blueprint-text text-sm text-center flex items-center justify-center gap-4">
+                <div id="map-legend" className="mt-5 blueprint-text text-sm text-center flex items-center justify-center gap-4" role="region" aria-label="Map legend">
                     <div className="flex items-center gap-2">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M2 19h20v2H2v-2zm1.5-7L7 15l5-7 5 7 3.5-3L22 19H2l1.5-7z" fill="white"/>
                         </svg>
                         <span>PRINCE</span>
                     </div>
-                    <span>|</span>
+                    <span aria-hidden="true">|</span>
                     <div>46 GOAL</div>
-                    <span>|</span>
+                    <span aria-hidden="true">|</span>
                     <div>R RED ROOM (BLOCKED)</div>
                 </div>
             </div>

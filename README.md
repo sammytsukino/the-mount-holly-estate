@@ -143,6 +143,113 @@ mount-holly-estate/
 └── package.json               # Project dependencies and scripts
 ```
 
+## Accessibility
+
+Mount Holly Estate has been built with accessibility as a core priority, following WCAG 2.1 AA standards to ensure an inclusive experience for all users.
+
+### ARIA Implementation
+
+#### Semantic Structure
+
+All components use proper HTML5 semantic elements:
+- `<main>`, `<aside>`, `<header>`, `<footer>`, `<section>` for clear document structure
+- Proper heading hierarchy (h1, h2, h3)
+- `<label>` elements associated with form inputs via `htmlFor` / `id`
+
+#### ARIA Labels and Descriptions
+
+**aria-label**: Provides accessible names for interactive elements without visible labels
+- Game board cells: "Crown-Bearer at position 3,5 facing NORTH"
+- Buttons: "Execute command", "Start game and open terminal"
+- Form regions: "Command input form", "Game command terminal"
+
+**aria-labelledby**: Connects elements with visible labels
+- Game board connected to "ESTATE MAP" heading
+- All sections connected to their respective headings (STATUS, LEGEND, MISSION BRIEFING)
+
+**aria-describedby**: Links elements with additional descriptive text
+- Command inputs connected to help text showing available commands
+- Game board connected to map legend
+
+#### Dynamic Content Updates
+
+**aria-live="polite"**: Announces changes without interrupting user activity
+- Status panel updates (position, direction, room count, steps)
+- Command output in terminal
+- Session number changes
+
+**role="status"**: Identifies status message regions
+- Command execution feedback
+- Game state notifications
+
+**aria-atomic="true"**: Ensures entire content is read when updated
+- Status panel changes
+- Terminal output messages
+
+#### Interactive Elements
+
+**Form Controls**:
+- All inputs have associated labels (visible or screen reader only)
+- Help text connected via `aria-describedby`
+- Clear button labels for actions
+
+**Grid Navigation**:
+- Game board uses `role="grid"` and `role="gridcell"`
+- Each cell has descriptive label indicating content and position
+
+#### Visual Hiding
+
+**aria-hidden="true"**: Hides decorative elements from screen readers
+- Terminal prompt symbols (>, >>)
+- Coordinate labels (visual only)
+- Decorative icons in legends
+- Separator characters (|)
+
+**sr-only class**: Visually hidden but accessible to screen readers
+- Form labels that would clutter visual design
+- Additional context for icon-only buttons
+
+### Keyboard Navigation
+
+- All interactive elements are keyboard accessible
+- Logical tab order through form controls
+- No keyboard traps
+- Skip to main content functionality via semantic structure
+
+### Color Contrast
+
+All text meets WCAG AA contrast requirements:
+- Blueprint theme: White text on dark blue (#2d5a8c)
+- Terminal: Green (#00FF00 variants) on black
+- Status indicators use both color and text labels
+
+### Focus Management
+
+- Visible focus indicators on all interactive elements
+- Focus styles enhanced with glowing borders
+- Logical focus order follows visual layout
+
+### Screen Reader Testing
+
+The application has been optimized for:
+- NVDA (Windows)
+- JAWS (Windows)
+- VoiceOver (macOS/iOS)
+- TalkBack (Android)
+
+### WCAG 2.1 AA Compliance
+
+Meets the following success criteria:
+- 1.3.1 Info and Relationships (Level A)
+- 1.4.3 Contrast Minimum (Level AA)
+- 2.1.1 Keyboard (Level A)
+- 2.4.3 Focus Order (Level A)
+- 2.4.6 Headings and Labels (Level AA)
+- 3.2.4 Consistent Identification (Level AA)
+- 3.3.2 Labels or Instructions (Level A)
+- 4.1.2 Name, Role, Value (Level A)
+- 4.1.3 Status Messages (Level AA)
+
 ## Design Philosophy
 
 ### Blueprint Aesthetic

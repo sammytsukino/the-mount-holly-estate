@@ -254,13 +254,13 @@ export default function Game() {
 
     return (
         <div className="min-h-screen blueprint-bg flex items-center justify-center p-8">
-            <div className="flex gap-8 max-w-[1800px]">
-                <div className="flex-shrink-0">
+            <main className="flex gap-8 max-w-[1800px]" role="main">
+                <section className="flex-shrink-0" aria-label="Game board">
                     <Board prince={prince} rooms={rooms} goal={{ row: GOAL_ROW, col: GOAL_COL, name: GOAL_NAME }} visitedCells={visitedCells} />
-                </div>
+                </section>
 
-                <div className="flex flex-col gap-5 w-[800px]">
-                <div className="blueprint-border bg-blueprint-dark/30 p-5">
+                <aside className="flex flex-col gap-5 w-[800px]" aria-label="Game information and controls">
+                <header className="blueprint-border bg-blueprint-dark/30 p-5">
                     <div className="flex justify-between items-center">
                         <div>
                             <h1 className="blueprint-outline-text text-3xl leading-tight">
@@ -270,73 +270,73 @@ export default function Game() {
                                 Drafts of the Blue Prince
                             </h2>
                         </div>
-                        <div className="text-right">
+                        <div className="text-right" aria-label="Current session number">
                             <div className="blueprint-text text-sm">SESSION</div>
-                            <div className="text-white/70 text-2xl font-mono">#{sessionNumber.toString().padStart(3, '0')}</div>
+                            <div className="text-white/70 text-2xl font-mono" aria-live="polite">#{sessionNumber.toString().padStart(3, '0')}</div>
                         </div>
                     </div>
-                </div>
+                </header>
 
                 <div className="grid grid-cols-3 gap-5">
-                    <div className="blueprint-border bg-blueprint-dark/30 p-5">
-                        <h3 className="blueprint-outline-text text-xl mb-4 text-center">STATUS</h3>
+                    <section className="blueprint-border bg-blueprint-dark/30 p-5" role="status" aria-live="polite" aria-atomic="true" aria-labelledby="status-heading">
+                        <h3 id="status-heading" className="blueprint-outline-text text-xl mb-4 text-center">STATUS</h3>
                         <div className="space-y-2 blueprint-text text-sm">
                             <div className="flex justify-between">
                                 <span className="text-white/70">Pos:</span>
-                                <span className="font-mono">{prince.row},{prince.col}</span>
+                                <span className="font-mono" aria-label={`Position ${prince.row} ${prince.col}`}>{prince.row},{prince.col}</span>
                             </div>
                             <div className="flex justify-between">
                                 <span className="text-white/70">Dir:</span>
-                                <span className="font-mono">{prince.facing[0]}</span>
+                                <span className="font-mono" aria-label={`Direction ${prince.facing}`}>{prince.facing[0]}</span>
                             </div>
                             <div className="flex justify-between">
                                 <span className="text-white/70">Rooms:</span>
-                                <span className="font-mono">{rooms.length}</span>
+                                <span className="font-mono" aria-label={`${rooms.length} blocking rooms`}>{rooms.length}</span>
                             </div>
                             <div className="flex justify-between">
                                 <span className="text-white/70">Steps:</span>
-                                <span className="font-mono">{stepsSinceLastRoom}</span>
+                                <span className="font-mono" aria-label={`${stepsSinceLastRoom} steps since last room`}>{stepsSinceLastRoom}</span>
                             </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div className="blueprint-border bg-blueprint-dark/30 p-5">
-                        <h3 className="blueprint-outline-text text-xl mb-4 text-center">LEGEND</h3>
-                        <div className="space-y-2.5">
-                            <div className="flex items-center gap-3">
-                                <div className="w-6 h-6 border border-white/60 bg-blueprint-light/50 flex items-center justify-center text-white text-sm">
+                    <section className="blueprint-border bg-blueprint-dark/30 p-5" aria-labelledby="legend-heading">
+                        <h3 id="legend-heading" className="blueprint-outline-text text-xl mb-4 text-center">LEGEND</h3>
+                        <ul className="space-y-2.5 list-none" role="list">
+                            <li className="flex items-center gap-3">
+                                <div className="w-6 h-6 border border-white/60 bg-blueprint-light/50 flex items-center justify-center text-white text-sm" aria-hidden="true">
                                     ▲
                                 </div>
                                 <span className="blueprint-text text-sm">Prince</span>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <div className="w-6 h-6 border border-amber-400/60 bg-amber-500/40 flex items-center justify-center text-white text-xs">
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <div className="w-6 h-6 border border-amber-400/60 bg-amber-500/40 flex items-center justify-center text-white text-xs" aria-hidden="true">
                                     46
                                 </div>
                                 <span className="blueprint-text text-sm">Goal</span>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <div className="w-6 h-6 border border-white/60 bg-red-600/60 flex items-center justify-center text-white text-sm">
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <div className="w-6 h-6 border border-white/60 bg-red-600/60 flex items-center justify-center text-white text-sm" aria-hidden="true">
                                     R
                                 </div>
                                 <span className="blueprint-text text-sm">Red Room (Blocked)</span>
-                            </div>
-                        </div>
-                    </div>
+                            </li>
+                        </ul>
+                    </section>
 
-                    <div className="blueprint-border bg-blueprint-dark/30 p-5">
-                        <h3 className="blueprint-outline-text text-xl mb-4 text-center">REFERENCE</h3>
-                        <div className="space-y-2 blueprint-text text-xs font-mono">
-                            <div>Grid wraps at edges</div>
-                            <div>Red rooms block path</div>
-                            <div>Cannot pass through</div>
-                            <div>Coords: row,col</div>
-                        </div>
-                    </div>
+                    <section className="blueprint-border bg-blueprint-dark/30 p-5" aria-labelledby="reference-heading">
+                        <h3 id="reference-heading" className="blueprint-outline-text text-xl mb-4 text-center">REFERENCE</h3>
+                        <ul className="space-y-2 blueprint-text text-xs font-mono list-none" role="list">
+                            <li>Grid wraps at edges</li>
+                            <li>Red rooms block path</li>
+                            <li>Cannot pass through</li>
+                            <li>Coords: row,col</li>
+                        </ul>
+                    </section>
                 </div>
 
-                <div className="blueprint-border bg-blueprint-dark/30 p-5">
-                    <h3 className="blueprint-text text-base font-bold mb-4">MISSION BRIEFING</h3>
+                <section className="blueprint-border bg-blueprint-dark/30 p-5" aria-labelledby="mission-heading">
+                    <h3 id="mission-heading" className="blueprint-text text-base font-bold mb-4">MISSION BRIEFING</h3>
                     <div className="space-y-2 blueprint-text text-sm">
                         
                         <p>
@@ -354,11 +354,11 @@ export default function Game() {
                             </p>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div className="border-2 border-green-500/50 bg-black p-5">
+                <section className="border-2 border-green-500/50 bg-black p-5" aria-labelledby="terminal-heading">
                     <div className="mb-4">
-                        <span className="text-green-500 text-base font-mono tracking-wider">TERMINAL</span>
+                        <h3 id="terminal-heading" className="text-green-500 text-base font-mono tracking-wider">TERMINAL</h3>
                     </div>
                     <form onSubmit={(e) => {
                         e.preventDefault();
@@ -367,34 +367,45 @@ export default function Game() {
                             handleCommand(input);
                             e.target.reset();
                         }
-                    }} className="flex gap-4">
+                    }} className="flex gap-4" role="form" aria-label="Game command terminal">
                         <div className="flex-1 relative">
-                            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-green-500 font-mono text-lg">
+                            <label htmlFor="game-command-input" className="sr-only">Enter game command</label>
+                            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-green-500 font-mono text-lg" aria-hidden="true">
                                 &gt;
                             </span>
                             <input 
+                                id="game-command-input"
                                 type="text" 
                                 name="command"
                                 placeholder="PLACE_ROOM 2,3,RED"
+                                aria-label="Game command input"
+                                aria-describedby="terminal-commands-help"
                                 className="w-full bg-black border border-green-500/30 text-green-500 font-mono px-10 py-4 text-base focus:outline-none focus:border-green-500 placeholder-green-500/30"
                             />
                         </div>
                         <button 
                             type="submit"
+                            aria-label="Execute command"
                             className="border border-green-500/50 bg-green-900/20 hover:bg-green-900/40 text-green-500 px-8 py-4 font-mono text-base tracking-wider transition-all duration-200"
                         >
                             RUN
                         </button>
                     </form>
-                    <div className="mt-4 text-green-500/50 text-xs font-mono">
+                    <div id="terminal-commands-help" className="mt-4 text-green-500/50 text-xs font-mono">
                         CMD: PLACE_ROOM row,col,RED | MOVE | LEFT | RIGHT | REPORT | RESET
                     </div>
-                </div>
+                </section>
 
                 {report && (
-                    <div className="border-2 border-green-500/50 bg-black p-5">
+                    <div 
+                        className="border-2 border-green-500/50 bg-black p-5"
+                        role="status"
+                        aria-live="polite"
+                        aria-atomic="true"
+                        aria-label="Command output"
+                    >
                         <div className="flex items-start gap-4">
-                            <span className="text-green-500/70 font-mono text-base">&gt;&gt;</span>
+                            <span className="text-green-500/70 font-mono text-base" aria-hidden="true">&gt;&gt;</span>
                             <p className="text-green-500 flex-1 font-mono text-base leading-relaxed">
                                 {report}
                             </p>
@@ -402,11 +413,11 @@ export default function Game() {
                     </div>
                 )}
 
-                <div className="text-center text-white/30 text-xs font-mono">
+                <footer className="text-center text-white/30 text-xs font-mono" aria-label="Terminal information">
                     Mt. Holly Terminal v1.0 | Grid: {BOARD_WIDTH}×{BOARD_HEIGHT}
-                </div>
-                </div>
-            </div>
+                </footer>
+                </aside>
+            </main>
         </div>
     );
 }
