@@ -1,5 +1,8 @@
 # The Mount Holly Estate - A Blueprint Adventure
 
+![Logo](https://res.cloudinary.com/dsy30p7gf/image/upload/v1770213971/header-game_s844kk.png)
+
+
 A command-line puzzle game where you navigate the ever-shifting halls of Mt. Holly Estate as the Crown-Bearer, seeking Room 46—the Antechamber where rightful heirs claim their inheritance.
 
 ## About
@@ -11,11 +14,11 @@ Your goal: Navigate from the entrance hall at position (1,3) to Room 46 at posit
 ## Screenshots
 
 ### Home Screen - Blueprint Briefing
-![Home Screen](https://res.cloudinary.com/dsy30p7gf/image/upload/v1769519799/intro_e7grp6.png)
+![Home Screen](https://res.cloudinary.com/dsy30p7gf/image/upload/v1770213085/Safari_Browser_1_mrvvxt.png)
 *The landing page displays mission briefing, available commands, and game mechanics*
 
 ### Game Interface - Estate Map & Terminal
-![Game Interface](https://res.cloudinary.com/dsy30p7gf/image/upload/v1769519799/board_hdnpgr.png)
+![Game Interface](https://res.cloudinary.com/dsy30p7gf/image/upload/v1770212987/Safari_Browser_bivpjq.png)
 *Active gameplay showing the 5x9 estate map, crown position, red blocking rooms, and terminal interface*
 
 ## Game Mechanics
