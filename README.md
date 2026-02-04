@@ -45,7 +45,7 @@ Your goal: Navigate from the entrance hall at position (1,3) to Room 46 at posit
 
 ### Victory Condition
 
-Reach Room 46 (position 9,3) to complete your inheritance claim and become the rightful heir to the Estate and all of Orindia.
+Reach Room 46 (position 9,3) to complete your inheritance claim and become the rightful heir to the Estate.
 
 ## Commands
 
