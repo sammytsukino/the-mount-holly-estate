@@ -66,40 +66,40 @@ export default function Game() {
         if (hasReachedGoal) {
             Swal.fire({
                 html: `
-                    <div style="font-family: 'Courier New', monospace; color: white; padding: 20px;">
-                        <div style="text-align: center; margin-bottom: 25px;">
-                            <h2 style="font-size: 32px; font-weight: bold; letter-spacing: 0.15em; color: rgba(251, 191, 36, 1); text-shadow: 0 0 20px rgba(251, 191, 36, 0.5); margin-bottom: 10px;">
-                                ✦ THE ANTECHAMBER ✦
-                            </h2>
-                            <div style="font-size: 18px; color: rgba(251, 191, 36, 0.8); letter-spacing: 0.1em;">
-                                ROOM 46
-                            </div>
+                    <div style="font-family: 'Courier New', monospace; color: white; padding: 24px;">
+                        <div style="text-align: center; margin-bottom: 24px;">
+                            <img 
+                                src="https://res.cloudinary.com/dsy30p7gf/image/upload/v1770211807/header-win_gh3lhi.png" 
+                                alt="Blueprint header marking Room 46, The Antechamber"
+                                style="width: 100%; height: auto; display: block; margin: 0 auto 16px; filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.7));"
+                            />
                         </div>
                         
-                        <div style="border: 2px solid rgba(255, 255, 255, 0.3); padding: 20px; margin-bottom: 20px; background: rgba(45, 90, 140, 0.3);">
-                            <p style="font-size: 15px; margin-bottom: 18px; line-height: 1.8; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">
-                                Room 46 materializes before you. As you step through the threshold, 
-                                the blueprint stills. The mansion exhales.
+                        <div style="border: 2px solid rgba(255, 255, 255, 0.35); padding: 20px; margin-bottom: 20px; background: rgba(45, 90, 140, 0.4);">
+                            <p style="font-size: 15px; margin-bottom: 16px; line-height: 1.8; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">
+                                You have reached Room 46: The Antechamber. By outdrafting the mansion, your paper crown stops being a childish rehearsal:
+                                the blueprint stills, the rooms finally align, and Mt. Holly at last acknowledges your claim.
                             </p>
-                            <p style="font-size: 15px; margin-bottom: 18px; line-height: 1.8; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">
-                                Its shifting walls settle into permanence, acknowledging your arrival. 
-                                The crown upon your head grows warm.
+                            <p style="font-size: 15px; margin-bottom: 16px; line-height: 1.8; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">
+                                The blue ink that guided you through impossible corridors condenses into gold. The walls
+                                no longer shift, not because the house has lost its will, but because you have traced
+                                the only line it cannot refuse.
                             </p>
                             <p style="font-size: 15px; line-height: 1.8; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">
-                                Mt. Holly Estate recognizes its heir.
+                                Your paper crown has become the true crown of the Heir of Orindia. This is the true heirloom of the Mt. Holly estate.
                             </p>
                         </div>
                         
-                        <div style="text-align: center; padding: 15px; border: 2px solid rgba(251, 191, 36, 0.5); background: rgba(251, 191, 36, 0.1); margin-bottom: 20px;">
-                            <p style="font-size: 17px; font-weight: bold; color: rgba(251, 191, 36, 1); text-shadow: 0 0 15px rgba(251, 191, 36, 0.5);">
-                                You are now the Crown-Bearer of Mt. Holly
+                        <div style="text-align: center; padding: 16px; border: 2px solid rgba(251, 191, 36, 0.6); background: rgba(251, 191, 36, 0.08); margin-bottom: 20px;">
+                            <p style="font-size: 17px; font-weight: bold; color: rgba(251, 191, 36, 1); text-shadow: 0 0 18px rgba(251, 191, 36, 0.7);">
+                                You are now the rightful heir of Mt. Holly.
                             </p>
                             <p style="font-size: 15px; margin-top: 8px; color: rgba(251, 191, 36, 0.9);">
-                                Rightful Heir to the Estate and to all of Orindia
+                                Keeper of the blueprint, master of the mansion, and Monarch of Orindia.
                             </p>
                         </div>
                         
-                        <p style="font-size: 13px; text-align: center; color: rgba(255, 255, 255, 0.6); font-style: italic; letter-spacing: 0.05em; margin-bottom: 30px;">
+                        <p style="font-size: 13px; text-align: center; color: rgba(255, 255, 255, 0.65); font-style: italic; letter-spacing: 0.06em; margin-bottom: 30px;">
                             The mansion is yours. The blueprint awaits your next draft.
                         </p>
                     </div>
@@ -254,7 +254,7 @@ export default function Game() {
 
     return (
         <div className="min-h-screen blueprint-bg flex items-start md:items-center justify-center p-4 md:p-8">
-            <main className="flex flex-col md:flex-row gap-6 md:gap-8 w-full max-w-[1800px]" role="main">
+            <main className="flex flex-col md:flex-row gap-6 md:gap-8 w-full max-w-[1800px] align-middle justify-center" role="main">
                 <section
                     className="flex-shrink-0 w-full md:w-auto flex justify-center md:justify-start mb-6 md:mb-0"
                     aria-label="Game board"

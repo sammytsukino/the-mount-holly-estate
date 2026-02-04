@@ -16,22 +16,19 @@ export default function Home() {
                         MOUNT HOLLY ESTATE
                     </h1>
                     <h2 className="blueprint-text text-4xl mb-6">
-                        BLUEPRINT
+                        A BLUEPRINT ADVENTURE
                     </h2>
                 </header>
 
                 <section className="blueprint-border bg-blueprint-dark/20 p-8 mb-6" aria-labelledby="game-description">
-                    <p id="game-description" className="blueprint-text text-lg mb-6 leading-relaxed">
-                        Mt. Holly Estate is no ordinary mansion: it shifts with every command you type. 
-                        As Crown-Bearer, you trace a living blueprint through its ever-changing halls, 
-                        seeking Room 46: the Antechamber where rightful heirs claim their inheritance.
+                    <p id="game-description" className="blueprint-text text-lg mb-4 leading-relaxed">
+                    You are the Paper Crown-Bearer, heir to the Mt. Holly mansion your uncle Herbert has left you, but there is a condition in his will: you must locate Room 46 hidden within the mansion to secure your inheritance. The problem is that Mt. Holly is no ordinary house. It is a living entity that shifts with every command you type.
                     </p>
                     
                     <p className="blueprint-text text-base mb-6 leading-relaxed text-white/90">
-                        But the mansion tests you. Red rooms materialize randomly as you navigate, 
-                        blocking entire corridors. These obstacles force you to recalculate your route 
-                        or use PLACE_ROOM to pre-emptively mark danger zones. The blueprint updates 
-                        in real-time, showing your path, blocked rooms, and the glowing target.
+                        The house redraws itself as you type commands. Corridors wrap around the grid, and red rooms appear mid-route,
+                        completely blocking your way. Your job is simple to explain and hard to pull off: read the map, trace a clean path,
+                        and outsmart the mansion before it traps you.
                     </p>
 
                     <div className="blueprint-border bg-blueprint-dark/30 p-4 mb-6" role="region" aria-labelledby="game-objectives">
@@ -41,7 +38,7 @@ export default function Home() {
                             <span className="text-white/70">TARGET:</span> Room 46 at 9,3
                         </p>
                         <p className="blueprint-text text-sm mb-3">
-                            <span className="text-amber-400/90">OBJECTIVE:</span> Navigate from spawn to Room 46 without hitting blocked rooms
+                            <span className="text-amber-400/90">OBJECTIVE:</span> Reach Room 46 without getting trapped behind red rooms
                         </p>
                         <p className="blueprint-text text-sm">
                             <span className="text-red-400/90">WARNING:</span> Red rooms completely block passage—plan ahead or reset

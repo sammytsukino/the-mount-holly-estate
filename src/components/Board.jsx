@@ -15,27 +15,18 @@ export default function Board({ prince, rooms, goal, visitedCells = [] }) {
     };
     
     const CrownIcon = ({ rotation, facing }) => (
-        <svg 
-            width="40" 
-            height="40" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            xmlns="http://www.w3.org/2000/svg"
-            aria-label={`Crown-Bearer facing ${facing}`}
-            role="img"
+        <img
+            src="https://res.cloudinary.com/dsy30p7gf/image/upload/v1770210057/paper-crown_ly8nce.png"
+            alt={`Paper crown of the Crown-Bearer facing ${facing}`}
             style={{
+                width: "40px",
+                height: "40px",
+                objectFit: "contain",
                 transform: `rotate(${rotation}deg)`,
-                transition: 'transform 0.3s ease',
-                filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.6))'
+                transition: "transform 0.3s ease",
+                filter: "drop-shadow(0 0 8px rgba(255, 255, 255, 0.6))",
             }}
-        >
-            <path 
-                d="M2 19h20v2H2v-2zm1.5-7L7 15l5-7 5 7 3.5-3L22 19H2l1.5-7z" 
-                fill="white"
-                stroke="white"
-                strokeWidth="0.5"
-            />
-        </svg>
+        />
     );
 
     for (let r = height; r >= 1; r--) {
