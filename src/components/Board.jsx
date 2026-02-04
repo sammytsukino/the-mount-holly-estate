@@ -114,8 +114,8 @@ export default function Board({ prince, rooms, goal, visitedCells = [] }) {
     }
 
     return (
-        <div className="flex justify-center items-center h-full">
-            <div className="blueprint-border p-5 bg-blueprint-dark/20">
+        <div className="flex justify-center items-center h-full overflow-x-auto">
+            <div className="blueprint-border p-5 bg-blueprint-dark/20 inline-block">
                 <div className="text-center mb-4">
                     <h3 id="estate-map-title" className="blueprint-text text-2xl font-bold tracking-wider">
                         ESTATE MAP

@@ -253,14 +253,22 @@ export default function Game() {
     };
 
     return (
-        <div className="min-h-screen blueprint-bg flex items-center justify-center p-8">
-            <main className="flex gap-8 max-w-[1800px]" role="main">
-                <section className="flex-shrink-0" aria-label="Game board">
-                    <Board prince={prince} rooms={rooms} goal={{ row: GOAL_ROW, col: GOAL_COL, name: GOAL_NAME }} visitedCells={visitedCells} />
+        <div className="min-h-screen blueprint-bg flex items-start md:items-center justify-center p-4 md:p-8">
+            <main className="flex flex-col md:flex-row gap-6 md:gap-8 w-full max-w-[1800px]" role="main">
+                <section
+                    className="flex-shrink-0 w-full md:w-auto flex justify-center md:justify-start mb-6 md:mb-0"
+                    aria-label="Game board"
+                >
+                    <Board
+                        prince={prince}
+                        rooms={rooms}
+                        goal={{ row: GOAL_ROW, col: GOAL_COL, name: GOAL_NAME }}
+                        visitedCells={visitedCells}
+                    />
                 </section>
 
-                <aside className="flex flex-col gap-5 w-[800px]" aria-label="Game information and controls">
-                <header className="blueprint-border bg-blueprint-dark/30 p-5">
+                <aside className="flex flex-col gap-5 w-full md:w-[800px]" aria-label="Game information and controls">
+                <header className="blueprint-border bg-blueprint-dark/30 p-4 md:p-5">
                     <div className="flex justify-between items-center">
                         <div>
                             <h1 className="blueprint-outline-text text-3xl leading-tight">
@@ -277,7 +285,7 @@ export default function Game() {
                     </div>
                 </header>
 
-                <div className="grid grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
                     <section className="blueprint-border bg-blueprint-dark/30 p-5" role="status" aria-live="polite" aria-atomic="true" aria-labelledby="status-heading">
                         <h3 id="status-heading" className="blueprint-outline-text text-xl mb-4 text-center">STATUS</h3>
                         <div className="space-y-2 blueprint-text text-sm">
@@ -335,7 +343,7 @@ export default function Game() {
                     </section>
                 </div>
 
-                <section className="blueprint-border bg-blueprint-dark/30 p-5" aria-labelledby="mission-heading">
+                <section className="blueprint-border bg-blueprint-dark/30 p-4 md:p-5" aria-labelledby="mission-heading">
                     <h3 id="mission-heading" className="blueprint-text text-base font-bold mb-4">MISSION BRIEFING</h3>
                     <div className="space-y-2 blueprint-text text-sm">
                         
@@ -356,18 +364,23 @@ export default function Game() {
                     </div>
                 </section>
 
-                <section className="border-2 border-green-500/50 bg-black p-5" aria-labelledby="terminal-heading">
+                <section className="border-2 border-green-500/50 bg-black p-4 md:p-5" aria-labelledby="terminal-heading">
                     <div className="mb-4">
                         <h3 id="terminal-heading" className="text-green-500 text-base font-mono tracking-wider">TERMINAL</h3>
                     </div>
-                    <form onSubmit={(e) => {
+                    <form
+                        onSubmit={(e) => {
                         e.preventDefault();
                         const input = e.target.elements.command.value.trim();
                         if (input) {
                             handleCommand(input);
                             e.target.reset();
-                        }
-                    }} className="flex gap-4" role="form" aria-label="Game command terminal">
+                            }
+                        }}
+                        className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+                        role="form"
+                        aria-label="Game command terminal"
+                    >
                         <div className="flex-1 relative">
                             <label htmlFor="game-command-input" className="sr-only">Enter game command</label>
                             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-green-500 font-mono text-lg" aria-hidden="true">
@@ -383,10 +396,10 @@ export default function Game() {
                                 className="w-full bg-black border border-green-500/30 text-green-500 font-mono px-10 py-4 text-base focus:outline-none focus:border-green-500 placeholder-green-500/30"
                             />
                         </div>
-                        <button 
+                        <button
                             type="submit"
                             aria-label="Execute command"
-                            className="border border-green-500/50 bg-green-900/20 hover:bg-green-900/40 text-green-500 px-8 py-4 font-mono text-base tracking-wider transition-all duration-200"
+                            className="border border-green-500/50 bg-green-900/20 hover:bg-green-900/40 text-green-500 px-8 py-4 font-mono text-base tracking-wider transition-all duration-200 w-full sm:w-auto text-center"
                         >
                             RUN
                         </button>
